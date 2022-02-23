@@ -7,12 +7,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class enigma {
 
+    static int countDialone = 0;
+    int countDialtwo = 0;
+    int countDialthree = 0;
+
     public static void main(String[] args) {
-        //linkTogether();
+        linkTogether();
         //enigmaNumbers("z");
-        test();
+        //test();
     }
 
 
@@ -43,62 +48,38 @@ public class enigma {
             charList.add(a.charAt(i));
         }
 
-        int countDialone = 0;
-        int countDialtwo = 0;
-        int countDialthree = 0;
 
-        int[] dialone = {17, 8, 21, 19, 20, 9, 16, 2, 6, 18, 25, 14, 22, 12, 26, 7, 1, 10, 4, 5, 3, 13, 24, 23, 11, 15};
-
-        int[] dialtwo = {23, 9, 16, 19, 6, 5, 20, 26, 2, 13, 24, 15, 10, 25, 12, 3, 21, 22, 4, 7, 17, 18, 1, 11, 14, 8};
-
-        int[] dialthree = {11, 13, 9, 22, 17, 21, 26, 24, 3, 19, 1, 20, 2, 23, 18, 25, 25, 5, 15, 10, 12, 6, 4, 14, 8, 16, 7};
-
-        if (countDialthree > 26){
-            countDialthree = 0;
-            countDialtwo = 0;
-            countDialone = 0;
-        }
-
-        String character = "a";
-
-        String characterOut = null;
-
-
-        int[] ar = {17, 8, 21, 19, 20, 9, 16, 2, 6, 18, 25, 14, 22, 12, 26, 7, 1, 10, 4, 5, 3, 13, 24, 23, 11, 15};
-        int[] result = new int[ar.length];
-        System.arraycopy(ar, 0, result, 1, ar.length - 1);
-        result[0] = ar[ar.length - 1];
-        System.out.println(Arrays.toString(result));
-
-        /*
-        String character = null;
         for (Character value : charList) {
-            character = enigmaNumbers(Character.toString(value));
-            System.out.println(character);
+            checkChar(Character.toString(value));
         }
 
-         */
+
 
     }
 
+    public static void checkChar(String input){
+        if (input.equals(" ")){
+            System.out.println(" ");
+        } else if (input.equals(",") || input.equals(", ")){
+            System.out.println(", ");
+        } else if (input.equals(".") || input.equals(". ")){
+            System.out.println(". ");
+        } else {
+            enigmaNumbers(input);
+        }
+    }
+
+    //                        a  b  c   d    e  f   g  h  i  j    k  l   m   n    o  p  q  r   s  t  u  v   w    x   y   z
+    static int[] dialone = {17, 8, 21, 19, 20, 9, 16, 2, 6, 18, 25, 14, 22, 12, 26, 7, 1, 10, 4, 5, 3, 13, 24, 23, 11, 15};
+
+    static int[] dialtwo = {23, 9, 16, 19, 6, 5, 20, 26, 2, 13, 24, 15, 10, 25, 12, 3, 21, 22, 4, 7, 17, 18, 1, 11, 14, 8};
+
+    static int[] dialthree = {11, 13, 9, 22, 17, 21, 26, 24, 3, 19, 1, 20, 2, 23, 18, 25, 25, 5, 15, 10, 12, 6, 4, 14, 8, 16, 7};
 
 
-
-    public static String enigmaNumbers(String input) {
-
-
-//                        a  b  c   d    e  f   g  h  i  j    k  l   m   n    o  p  q  r   s  t  u  v   w    x   y   z
-        int[] dialone = {17, 8, 21, 19, 20, 9, 16, 2, 6, 18, 25, 14, 22, 12, 26, 7, 1, 10, 4, 5, 3, 13, 24, 23, 11, 15};
-
-        int[] dialtwo = {23, 9, 16, 19, 6, 5, 20, 26, 2, 13, 24, 15, 10, 25, 12, 3, 21, 22, 4, 7, 17, 18, 1, 11, 14, 8};
-
-        int[] dialthree = {11, 13, 9, 22, 17, 21, 26, 24, 3, 19, 1, 20, 2, 23, 18, 25, 25, 5, 15, 10, 12, 6, 4, 14, 8, 16, 7};
-
-
-        String character = input;
+    public static void enigmaNumbers(String input) {
 
         String characterOut = null;
-
 
         int dialoneIndex = 0;
         int dialtwoIndex;
@@ -106,10 +87,10 @@ public class enigma {
         int dialfourIndex;
         int dialfiveIndex;
         int dialsixIndex;
-        int characterIntAfterEnigmma;
+        int characterIntAfterEnigmma = 0;
 
 
-        switch (character) {
+        switch (input) {
             case "a", "A" -> dialoneIndex = 0;
             case "b", "B" -> dialoneIndex = 1;
             case "c", "C" -> dialoneIndex = 2;
@@ -136,7 +117,6 @@ public class enigma {
             case "x", "X" -> dialoneIndex = 23;
             case "y", "Y" -> dialoneIndex = 24;
             case "z", "Z" -> dialoneIndex = 25;
-
         }
 
 
@@ -153,18 +133,6 @@ public class enigma {
 
 
         characterIntAfterEnigmma = dialone[dialsixIndex - 1];
-
-        /*
-
-        System.out.println(dialoneIndex + 1);
-        System.out.println(dialtwoIndex  );
-        System.out.println(dialthreeIndex );
-        System.out.println(dialfourIndex );
-        System.out.println(dialfiveIndex );
-        System.out.println(dialsixIndex );
-
-         */
-
 
         if (characterIntAfterEnigmma == 1) {
             characterOut = "a";
@@ -220,8 +188,16 @@ public class enigma {
             characterOut = "z";
         }
 
+        if (countDialone < 26){
+            countDialone++;
 
-        return characterOut;
+            int[] result = new int[dialone.length];
+            System.arraycopy(dialone, 0, result, 1, dialone.length - 1);
+            result[0] = dialone[25];
+
+            dialone = result;
+        }
+        System.out.println(characterOut);
 
     }
 
@@ -237,17 +213,11 @@ public class enigma {
         int[] dialthree = {11, 13, 9, 22, 17, 21, 26, 24, 3, 19, 1, 20, 2, 23, 18, 25, 25, 5, 15, 10, 12, 6, 4, 14, 8, 16, 7};
 
 
-        String character = "a";
+        int[] result = new int[dialone.length];
+        System.arraycopy(dialone, 0, result, 1, dialone.length - 1);
+        result[0] = dialone[25];
 
-        String characterOut = null;
-
-
-        int[] ar = {17, 8, 21, 19, 20, 9, 16, 2, 6, 18, 25, 14, 22, 12, 26, 7, 1, 10, 4, 5, 3, 13, 24, 23, 11, 15};
-        int[] result = new int[ar.length];
-        System.arraycopy(ar, 0, result, 1, ar.length - 1);
-        result[0] = ar[ar.length - 1];
-        System.out.println(Arrays.toString(result));
-
+        dialone = result;
 
     }
 
