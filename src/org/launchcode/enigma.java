@@ -55,9 +55,9 @@ public class enigma {
 
     public static void checkChar(String input){
         switch (input) {
-            case " " -> System.out.println(" ");
-            case ",", ", " -> System.out.println(", ");
-            case ".", ". " -> System.out.println(". ");
+            case " " -> System.out.print(" ");
+            case ",", ", " -> System.out.print(", ");
+            case ".", ". " -> System.out.print(". ");
             default -> enigmaNumbers(input);
         }
     }
@@ -181,7 +181,7 @@ public class enigma {
             characterOut = "z";
         }
 
-        if (countDialone < 27){
+        if (countDialone < 26){
             countDialone++;
 
             int[] result = new int[dialone.length];
@@ -189,8 +189,10 @@ public class enigma {
             result[0] = dialone[25];
 
             dialone = result;
+
+
         }
-        if (countDialone == 26 && countDialtwo < 27) {
+        if (countDialone == 26 && countDialtwo < 26) {
             countDialone = 0;
             countDialtwo++;
             int[] result = new int[dialtwo.length];
@@ -199,7 +201,7 @@ public class enigma {
 
             dialtwo = result;
         }
-        if (countDialtwo == 26 && countDialthree < 27) {
+        if (countDialtwo == 26 && countDialthree < 26) {
             countDialtwo = 0;
             countDialthree++;
             int[] result = new int[dialthree.length];
@@ -208,7 +210,9 @@ public class enigma {
 
             dialthree = result;
         }
-        System.out.println(characterOut);
+
+
+        System.out.print(characterOut);
 
     }
 
