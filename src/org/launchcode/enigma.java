@@ -1,23 +1,19 @@
 package org.launchcode;
 
 
-import java.text.ParseException;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 
 public class enigma {
 
     static int countDialone = 0;
-    int countDialtwo = 0;
-    int countDialthree = 0;
+    static int countDialtwo = 0;
+    static int countDialthree = 0;
 
     public static void main(String[] args) {
         linkTogether();
-        //enigmaNumbers("z");
-        //test();
     }
 
 
@@ -39,7 +35,7 @@ public class enigma {
 
         assert sentence != null;
 
-        ArrayList<Character> charList = new ArrayList<Character>();
+        ArrayList<Character> charList = new ArrayList<>();
 
 
         String a = sentence;
@@ -58,14 +54,11 @@ public class enigma {
     }
 
     public static void checkChar(String input){
-        if (input.equals(" ")){
-            System.out.println(" ");
-        } else if (input.equals(",") || input.equals(", ")){
-            System.out.println(", ");
-        } else if (input.equals(".") || input.equals(". ")){
-            System.out.println(". ");
-        } else {
-            enigmaNumbers(input);
+        switch (input) {
+            case " " -> System.out.println(" ");
+            case ",", ", " -> System.out.println(", ");
+            case ".", ". " -> System.out.println(". ");
+            default -> enigmaNumbers(input);
         }
     }
 
@@ -87,7 +80,7 @@ public class enigma {
         int dialfourIndex;
         int dialfiveIndex;
         int dialsixIndex;
-        int characterIntAfterEnigmma = 0;
+        int characterIntAfterEnigmma;
 
 
         switch (input) {
@@ -188,7 +181,7 @@ public class enigma {
             characterOut = "z";
         }
 
-        if (countDialone < 26){
+        if (countDialone < 27){
             countDialone++;
 
             int[] result = new int[dialone.length];
@@ -197,29 +190,26 @@ public class enigma {
 
             dialone = result;
         }
+        if (countDialone == 26 && countDialtwo < 27) {
+            countDialone = 0;
+            countDialtwo++;
+            int[] result = new int[dialtwo.length];
+            System.arraycopy(dialtwo, 0, result, 1, dialtwo.length - 1);
+            result[0] = dialtwo[25];
+
+            dialtwo = result;
+        }
+        if (countDialtwo == 26 && countDialthree < 27) {
+            countDialtwo = 0;
+            countDialthree++;
+            int[] result = new int[dialthree.length];
+            System.arraycopy(dialthree, 0, result, 1, dialthree.length - 1);
+            result[0] = dialthree[25];
+
+            dialthree = result;
+        }
         System.out.println(characterOut);
 
     }
-
-    public static void test(){
-        int countDialone = 0;
-        int countDialtwo = 0;
-        int countDialthree = 0;
-
-        int[] dialone = {17, 8, 21, 19, 20, 9, 16, 2, 6, 18, 25, 14, 22, 12, 26, 7, 1, 10, 4, 5, 3, 13, 24, 23, 11, 15};
-
-        int[] dialtwo = {23, 9, 16, 19, 6, 5, 20, 26, 2, 13, 24, 15, 10, 25, 12, 3, 21, 22, 4, 7, 17, 18, 1, 11, 14, 8};
-
-        int[] dialthree = {11, 13, 9, 22, 17, 21, 26, 24, 3, 19, 1, 20, 2, 23, 18, 25, 25, 5, 15, 10, 12, 6, 4, 14, 8, 16, 7};
-
-
-        int[] result = new int[dialone.length];
-        System.arraycopy(dialone, 0, result, 1, dialone.length - 1);
-        result[0] = dialone[25];
-
-        dialone = result;
-
-    }
-
 
 }
